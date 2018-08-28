@@ -28,3 +28,9 @@ Now you can:
 * `npm run serve` to start a development server. Navigate to the printed URL.
 * `npm run test` to run the included test.
 * `code .` to run the VS Code editor in the project, if you will.
+
+## Reference
+
+* The stream/observable library that we're using is [xstream](http://staltz.github.io/xstream/). It also has [extras](https://github.com/staltz/xstream/blob/master/EXTRA_DOCS.md).
+* [The DOM driver](https://cycle.js.org/api/dom.html) expects a `Stream<VNode>`, such as produced by [snabbdom](https://github.com/snabbdom/snabbdom).
+* Of course, [the Cycle.js docs](https://cycle.js.org/getting-started.html).
