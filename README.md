@@ -27,3 +27,4 @@ Now you can:
 
 * `npm run serve` to start a development server. Navigate to the printed URL.
 * `npm run test` to run the included test.
+* `code .` to run the VS Code editor in the project, if you will.
