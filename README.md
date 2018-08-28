@@ -6,7 +6,7 @@ Don't get stuck! Any issues—please ask right away!
 
 Let's jam!
 
-# A short list of pre-requisites
+## A short list of pre-requisites
 
 1. Node.js:
    * I suggest installing Node.js using [nvs](https://github.com/jasongin/nvs). See the readme for easy installation instructions.
