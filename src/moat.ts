@@ -17,7 +17,7 @@ interface Sinks {
 const whetherInMoat = ({ x, y }: Coords) => x > 305 && x < 607 && y > 185 && y < 480
 
 export default ({ DOM }: Sources): Sinks => {
-  const mapCoords$ = DOM
+  const mapCoords$: Stream<Coords> = DOM
     .select('.map')
     .events('mousemove')
     .map(({ pageX, pageY, target }: MouseEvent) => {
@@ -25,12 +25,15 @@ export default ({ DOM }: Sources): Sinks => {
       return {
         x: pageX - map.offsetLeft,
         y: pageY - map.offsetTop
-      } as Coords | null
+      }
     })
-    .startWith(null)
+
+  const isInMoat$ = mapCoords$
+    .map(whetherInMoat)
   
-  const vnode$ = mapCoords$ 
-    .map((coords) => div([
+  const vnode$ = isInMoat$
+    .startWith(false)
+    .map((isInMoat) => div([
       img(
         '.map',
         {
@@ -40,7 +43,7 @@ export default ({ DOM }: Sources): Sinks => {
             width: '800px'
           },
           style: {
-            filter: coords !== null && whetherInMoat(coords) ? 'invert(.8)' : 'none'
+            filter: isInMoat ? 'invert(.8)' : 'none'
           }
         }
       )
