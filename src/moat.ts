@@ -1,7 +1,7 @@
 import { Stream } from 'xstream'
 import { VNode, img, div, DOMSource } from '@cycle/dom'
 
-interface Coords {
+interface Coordinates {
   x: number,
   y: number
 }
@@ -14,10 +14,10 @@ interface Sinks {
   DOM: Stream<VNode>
 }
 
-const whetherInMoat = ({ x, y }: Coords) => x > 305 && x < 607 && y > 185 && y < 480
+const whetherInMoat = ({ x, y }: Coordinates) => x > 305 && x < 607 && y > 185 && y < 480
 
 export default ({ DOM }: Sources): Sinks => {
-  const mapCoords$: Stream<Coords> = DOM
+  const mapCoords$: Stream<Coordinates> = DOM
     .select('.map')
     .events('mousemove')
     .map(({ pageX, pageY, target }: MouseEvent) => {
