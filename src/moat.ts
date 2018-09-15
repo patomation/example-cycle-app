@@ -14,7 +14,7 @@ interface Sinks {
   DOM: Stream<VNode>
 }
 
-const isInMoat = ({ x, y }: Coords) => x > 305 && x < 607 && y > 185 && y < 480
+const whetherInMoat = ({ x, y }: Coords) => x > 305 && x < 607 && y > 185 && y < 480
 
 export default ({ DOM }: Sources): Sinks => {
   const mapCoords$ = DOM
@@ -40,7 +40,7 @@ export default ({ DOM }: Sources): Sinks => {
             width: '800px'
           },
           style: {
-            filter: coords !== null && isInMoat(coords) ? 'invert(.8)' : 'none'
+            filter: coords !== null && whetherInMoat(coords) ? 'invert(.8)' : 'none'
           }
         }
       )
