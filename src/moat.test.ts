@@ -1,4 +1,4 @@
-import OldCity from './old-city'
+import Moat from './moat'
 import test from 'ava'
 import { mockDOMSource, div, img } from '@cycle/dom'
 import { mockTimeSource } from '@cycle/time'
@@ -38,7 +38,7 @@ test.cb('vnode$', (t) => {
     }
   })
 
-  const { DOM: actualVNode$ } = OldCity({ DOM })
+  const { DOM: actualVNode$ } = Moat({ DOM })
 
   const expectedVNode$ = Time.diagram(
     'a-b-c-d',

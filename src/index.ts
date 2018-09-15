@@ -1,7 +1,7 @@
 import run from '@cycle/run'
 import { makeDOMDriver } from '@cycle/dom'
-import OldCity from './old-city'
+import Moat from './moat'
 
-run(OldCity as any, {
+run(Moat as any, {
   DOM: makeDOMDriver('body')
 })
