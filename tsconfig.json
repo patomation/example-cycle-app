@@ -3,6 +3,7 @@
  
   "compilerOptions": {
     "strictFunctionTypes": false,
+    "target": "ES2017",
     "declaration": false
   }
 }
