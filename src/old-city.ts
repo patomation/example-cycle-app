@@ -14,6 +14,7 @@ interface Sinks {
   DOM: Stream<VNode>
 }
 
+const isInOldCity = ({ x, y }: Coords) => x > 305 && x < 607 && y > 185 && y < 480
 
 export default ({ DOM }: Sources): Sinks => {
   const mapCoords$ = DOM
@@ -27,8 +28,6 @@ export default ({ DOM }: Sources): Sinks => {
       } as Coords | null
     })
     .startWith(null)
-
-  const isInOldCity = ({ x, y }: Coords) => x > 305 && x < 607 && y > 185 && y < 480
   
   const vnode$ = mapCoords$ 
     .map((coords) => div([
