@@ -4,6 +4,9 @@
   "compilerOptions": {
     "strictFunctionTypes": false,
     "target": "ES2017",
-    "declaration": false
+    "declaration": false,
+    "sourceMap": true,
+    "inlineSourceMap": false,
+    "inlineSources": false
   }
 }
