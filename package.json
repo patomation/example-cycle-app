@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/mightyiam/example-cycle-app#readme",
   "devDependencies": {
-    "@cycle/dom": "^21.0.0",
+    "@cycle/dom": "^21.1.0",
     "@cycle/run": "^4.4.0",
     "@cycle/time": "^0.15.0",
     "ava": "^1.0.0-beta.7",
