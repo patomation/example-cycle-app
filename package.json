@@ -4,7 +4,7 @@
   "description": "Example Cycle.js app",
   "scripts": {
     "test": "ava",
-    "serve": "parcel serve src/index.html"
+    "serve": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
