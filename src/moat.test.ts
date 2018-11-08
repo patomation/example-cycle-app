@@ -48,7 +48,7 @@ test.cb('vnode$', (t) => {
           '.map',
           {
             attrs: {
-              src: 'https://upload.wikimedia.org/wikipedia/commons/7/72/Chiang_Mai_map.png',
+              src: '/map.png',
               alt: 'Chiang Mai map',
               width: '800px'
             },
@@ -63,7 +63,7 @@ test.cb('vnode$', (t) => {
           '.map',
           {
             attrs: {
-              src: 'https://upload.wikimedia.org/wikipedia/commons/7/72/Chiang_Mai_map.png',
+              src: '/map.png',
               alt: 'Chiang Mai map',
               width: '800px'
             },
@@ -78,7 +78,7 @@ test.cb('vnode$', (t) => {
           '.map',
           {
             attrs: {
-              src: 'https://upload.wikimedia.org/wikipedia/commons/7/72/Chiang_Mai_map.png',
+              src: '/map.png',
               alt: 'Chiang Mai map',
               width: '800px'
             },
@@ -93,7 +93,7 @@ test.cb('vnode$', (t) => {
           '.map',
           {
             attrs: {
-              src: 'https://upload.wikimedia.org/wikipedia/commons/7/72/Chiang_Mai_map.png',
+              src: '/map.png',
               alt: 'Chiang Mai map',
               width: '800px'
             },

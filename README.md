@@ -39,3 +39,7 @@ Now you can:
 * Display time spent inside moat.
 * Display clicks inside moat.
 * Display mouse coordinates.
+
+## Attribution
+
+* Map from https://commons.wikimedia.org/wiki/File:Chiang_Mai_map.png
