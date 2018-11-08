@@ -8,7 +8,7 @@ const mockImg = {
   offsetTop: 0
 }
 
-test.cb('vnode$', (t) => {
+test.cb('vnode$', (t): void => {
   const Time = mockTimeSource()
 
   const mousemove = Time.diagram(
@@ -16,7 +16,7 @@ test.cb('vnode$', (t) => {
     {
       b: {
         pageX: 50,
-        pageY: 50, 
+        pageY: 50,
         target: mockImg
       },
       c: {

@@ -1,6 +1,6 @@
 const { resolve } = require('path')
 
-const distPath = resolve(__dirname, 'dist');
+const distPath = resolve(__dirname, 'dist')
 
 module.exports = {
   context: __dirname,
