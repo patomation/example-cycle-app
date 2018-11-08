@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/mightyiam/example-cycle-app.svg?branch=master)](https://travis-ci.org/mightyiam/example-cycle-app)
 [![Greenkeeper badge](https://badges.greenkeeper.io/mightyiam/example-cycle-app.svg)](https://greenkeeper.io/)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Welcome!
 
@@ -21,8 +22,8 @@ Let's jam!
 Now you can:
 
 * `npm run serve` to start a development server. Navigate to the printed URL.
-* `npm run test` to run the included test.
-* `code .` to run the free, open source and terribly popular [Visual Studio Code](https://code.visualstudio.com/) editor in the project.
+* `npm run test` to lint and run the included test.
+* `code .` to run the free, open source and terribly popular [Visual Studio Code](https://code.visualstudio.com/) editor in the project. And for integrated linting, install [the ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 
 ## Reference
 
