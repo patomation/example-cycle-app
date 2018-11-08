@@ -1,5 +1,6 @@
 # Cycle.js workshop
 
+[![Build Status](https://travis-ci.org/mightyiam/example-cycle-app.svg?branch=master)](https://travis-ci.org/mightyiam/example-cycle-app)
 [![Greenkeeper badge](https://badges.greenkeeper.io/mightyiam/example-cycle-app.svg)](https://greenkeeper.io/)
 
 ## Welcome!
