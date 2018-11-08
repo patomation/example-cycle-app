@@ -1,5 +1,7 @@
 # Cycle.js workshop
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mightyiam/example-cycle-app.svg)](https://greenkeeper.io/)
+
 ## Welcome!
 
 Don't get stuck! Any issues—please ask right away!
