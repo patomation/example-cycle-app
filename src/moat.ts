@@ -14,7 +14,7 @@ interface Sinks {
   DOM: Stream<VNode>
 }
 
-const whetherInMoat = ({ x, y }: Coordinates): Boolean => x > 305 && x < 607 && y > 185 && y < 480
+const whetherInMoat = ({ x, y }: Coordinates): boolean => x > 305 && x < 607 && y > 185 && y < 480
 
 export default ({ DOM }: Sources): Sinks => {
   const mapCoords$: Stream<Coordinates> = DOM
