@@ -31,18 +31,20 @@ Now you can:
 * [The DOM driver](https://cycle.js.org/api/dom.html) expects a `Stream<VNode>`, such as produced by [snabbdom](https://github.com/snabbdom/snabbdom).
 * Of course, [the Cycle.js docs](https://cycle.js.org/getting-started.html).
 
-## Slides
+## Suggested order
 
-1. Getting started.
-1. Show what it does and explain how the code works.
-1. xstream method `debug`.
-1. Setting a breakpoint.
+1. Go through the getting started section above.
+1. Study the code.
+1. Learn about [the xstream method `debug`](http://staltz.github.io/xstream/#debug).
+1. Learn how to use the dev tools debugger.
+1. Try implementing one of the ideas, below.
 
 ## Ideas
 
+* Display current mouse coordinates.
+* Display count of click inside moat.
+* Display list of clicks inside moat with coordinates.
 * Display time spent inside moat.
-* Display clicks inside moat.
-* Display mouse coordinates.
 
 ## Attribution
 
