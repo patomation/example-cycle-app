@@ -1,7 +1,5 @@
 language: node_js
-node_js:
-  - lts/*
-  - node
+node_js: node
 before_install:
   - npm install -g npm@latest
   - npm install -g greenkeeper-lockfile
