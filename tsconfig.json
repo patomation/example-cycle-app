@@ -1,12 +1,6 @@
 {
-  "extends": "./node_modules/tsconfigs/browser",
- 
+  "extends": "tsconfigs/browser-executable",
   "compilerOptions": {
-    "strictFunctionTypes": false,
-    "target": "ES2017",
-    "declaration": false,
-    "sourceMap": true,
-    "inlineSourceMap": false,
-    "inlineSources": false
+    "strictFunctionTypes": false
   }
 }

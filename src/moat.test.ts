@@ -36,7 +36,7 @@ test.cb('vnode$', (t): void => {
     '.map': {
       mousemove: mousemove
     }
-  })
+  }) as any // https://github.com/cyclejs/cyclejs/issues/869
 
   const { DOM: actualVNode$ } = Moat({ DOM })
 
