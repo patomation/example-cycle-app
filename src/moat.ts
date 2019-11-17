@@ -1,5 +1,5 @@
 import { Stream } from 'xstream'
-import { VNode, img, div, DOMSource } from '@cycle/dom'
+import { VNode, img, div, MainDOMSource } from '@cycle/dom'
 
 interface Coordinates {
   x: number
@@ -7,7 +7,7 @@ interface Coordinates {
 }
 
 interface Sources {
-  DOM: DOMSource
+  DOM: MainDOMSource
 }
 
 interface Sinks {
