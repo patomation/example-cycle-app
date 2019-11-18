@@ -31,7 +31,7 @@
     "@cycle/dom": "22.4.0",
     "@cycle/run": "5.4.0",
     "@cycle/time": "0.20.0",
-    "@typescript-eslint/eslint-plugin": "2.7.0",
+    "@typescript-eslint/eslint-plugin": "2.8.0",
     "ava": "2.4.0",
     "eslint": "6.6.0",
     "eslint-config-standard-with-typescript": "11.0.1",
