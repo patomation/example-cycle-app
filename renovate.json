@@ -6,7 +6,7 @@
     "enabled": true
   },
   "node": {
-    "supportPolicy": "all"
+    "supportPolicy": "current"
   },
   "rangeStrategy": "replace"
 }
