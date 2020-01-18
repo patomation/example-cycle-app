@@ -8,12 +8,6 @@
     "test": "run-s lint unit",
     "serve": "webpack-dev-server"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "npm test"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mightyiam/example-cycle-app.git"

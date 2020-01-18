@@ -1,13 +1,43 @@
 import run from '@cycle/run'
-import { makeDOMDriver, MainDOMSource, VNode, div, button } from '@cycle/dom'
-import Moat from './moat'
+import { makeDOMDriver, MainDOMSource, VNode, div, button, span, input } from '@cycle/dom'
 import xs, { Stream } from 'xstream'
 import { timeDriver } from '@cycle/time'
 
 type Periodic = (arg0: number) => Stream<number>
 
+interface TickAction {
+  kind: 'tick'
+}
+interface SetBarCountAction {
+  kind: 'setBarCount'
+  value: number
+}
+interface TogglePlaybackAction {
+  kind: 'togglePlayback'
+}
+
+interface SetBpmAction {
+  kind: 'setBpm'
+  value: number
+}
+
+// This is a union type
+type Action =
+  TickAction |
+  SetBarCountAction |
+  TogglePlaybackAction |
+  SetBpmAction
+
+interface State {
+  isPlaying: boolean
+  barCount: number
+  bpm: number
+  step: number
+  tick: number
+}
+
 interface Sources {
-  DOM: MainDOMSource,
+  DOM: MainDOMSource
   Time: {
     periodic: Periodic
   }
@@ -17,78 +47,154 @@ interface Sinks {
   DOM: Stream<VNode>
 }
 
+const initialState: State = {
+  isPlaying: false,
+  barCount: 1,
+  bpm: 120,
+  step: 0,
+  tick: 0
+}
+
+const bpmToMs = (bpm: number): number => 60 / bpm * 1000
+
+const tickInterval = 10
 run(
   ({ DOM, Time }: Sources) => {
-    
-    const playButton$: Stream<MouseEvent> = DOM
+    const tickAction$: Stream<TickAction> = Time.periodic(tickInterval) // tick every 500ms
+      .map(() => ({ kind: 'tick' as 'tick' }))
+
+    const setBarCountAction$: Stream<SetBarCountAction> = DOM
+      .select('.bar')
+      .events('input')
+      .map(e => ({
+        kind: 'setBarCount',
+        value: parseInt((e.target as HTMLInputElement).value)
+      }))
+
+    const togglePlayback$: Stream<TogglePlaybackAction> = DOM
       .select('.play')
       .events('click')
+      .mapTo({ kind: 'togglePlayback' })
 
-    let toggle = false
+    const setBpmAction$: Stream<SetBpmAction> = DOM
+      .select('.bpm')
+      .events('input')
+      .map(e => ({
+        kind: 'setBpm',
+        value: parseInt((e.target as HTMLInputElement).value)
+      }))
 
-    const isPLaying$: Stream<boolean> = playButton$
-      .map( () => {
-        toggle = !toggle
-        return toggle 
-      })
-
-    
-    const tick$ = Time.periodic(500) //tick every 100ms
-      .fold(acc =>
-        toggle === true
-          ? acc < 10 ? acc + 1 : 0 //reset tick counter after 60 ticks
-          : 0 // If not playing return 0 for each tick
-      , 0) 
-    
-    
-    const state$ = xs.combine(
-      tick$,
-      isPLaying$.startWith(false)
+    const action$: Stream<Action> = xs.merge(
+      tickAction$,
+      setBarCountAction$,
+      togglePlayback$,
+      setBpmAction$
     )
-    
-    
+    const state$: Stream<State> = action$
+      .fold((state, action) => {
+        switch (action.kind) {
+          case 'tick':
+            state.tick += tickInterval
+            if (!state.isPlaying) break
+            state.step = Math.floor(state.tick / bpmToMs(state.bpm))
+            // wetherStep?
+            // console.log(state.tick % bpmToMs(state.bpm))
+            // if (bpmToMs(state.bpm) % state.tick === 0) {
+            // console.log('step?')
+
+            // state.step = state.step < ((state.barCount * 4) - 1)
+            //   ? state.step + 1
+            //   : 0
+            // }
+
+            break
+          case 'setBarCount':
+            state.barCount = action.value
+            state.step = state.step < ((action.value * 4) - 1) ? state.step + 1 : 0
+            break
+          case 'togglePlayback':
+            state.isPlaying = !state.isPlaying
+            break
+          case 'setBpm':
+            state.bpm = action.value
+            break
+          default:
+            break
+        }
+        return state
+      }, initialState)
 
     const vnode$ = state$
-    .map(([tick, isPLaying]): VNode =>
-      div([
-        button(
-          '.play', {
-            style:{
-              background: isPLaying ? 'purple' : 'gray'
-            }},
-            [
-              isPLaying ? 'stop' : 'play'
+      .map(({ step, tick, isPlaying, bpm, barCount }): VNode =>
+        div([
+          div(
+            {
+              style: {
+                diplay: 'flex'
+              }
+            }, [
+              button(
+                '.play', {
+                  style: {
+                    background: isPlaying ? 'purple' : 'gray'
+                  }
+                },
+                [
+                  isPlaying ? 'stop' : 'play'
+                ]),
+              span([`step ${step}`]),
+              span([`tick ${tick}`]),
+              input(
+                '.bpm', {
+                  attrs: {
+                    type: 'number',
+                    value: bpm
+                  }
+                }),
+              input(
+                '.bar', {
+                  attrs: {
+                    type: 'number',
+                    value: barCount
+                  }
+                })
             ]),
-        
-        div(['tick ' + tick]),
 
-        div({
-          style:{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between'
-          }
-        },[
-          div({style:{background: tick ===  0 ? 'gold' : 'gray', color: 'white'}},['0']),
-          div({style:{background: tick ===  1 ? 'gold' : 'gray', color: 'white'}},['0']),
-          div({style:{background: tick ===  2 ? 'gold' : 'gray', color: 'white'}},['0']),
-          div({style:{background: tick ===  3 ? 'gold' : 'gray', color: 'white'}},['0']),
-          div({style:{background: tick ===  4 ? 'gold' : 'gray', color: 'white'}},['0']),
-          div({style:{background: tick ===  5 ? 'gold' : 'gray', color: 'white'}},['0']),
-          div({style:{background: tick ===  6 ? 'gold' : 'gray', color: 'white'}},['0']),
-          div({style:{background: tick ===  7 ? 'gold' : 'gray', color: 'white'}},['0']),
-          div({style:{background: tick ===  8 ? 'gold' : 'gray', color: 'white'}},['0']),
-          div({style:{background: tick ===  9 ? 'gold' : 'gray', color: 'white'}},['0']),
-          div({style:{background: tick === 10 ? 'gold' : 'gray', color: 'white'}},['0']),
+          div({
+            style: {
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between'
+            }
+          },
+          new Array(barCount * 4).fill(0).map((_, index) =>
+            div(
+              {
+                style: {
+                  // background: tick ===  index
+                  //   ? 'gold'
+                  //   : 'gray',
+                  background: index % 4 === 0 ? 'gold' : 'gray',
+                  color: 'white',
+                  height: '20px',
+                  width: '20px',
+                  margin: '1px',
+                  ...(step === index
+                    ? { filter: 'brightness(50%)' }
+                    : null)
+                }
+              },
+              [''])
+          )
+          )
+
         ])
-      
-      ])
-    )
+      )
 
     return {
       DOM: vnode$
     }
-  },{
+  }, {
     DOM: makeDOMDriver('body'),
     Time: timeDriver
-})
+  })
